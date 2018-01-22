@@ -1,0 +1,14 @@
+The goal of this paper is to describe the algorithm that we are using
+in PeakSegPipeline::problem.target in order to quickly compute the
+target inteval, by only evaluating FPOP a few O(log N) times, even
+when there are hundreds/thousands of desired peaks/segments.
+
+** TODOs
+
+** 19 Jan 2018
+
+[[file:FPOP.models.R]] uses PeakSegPipeline to compute target intervals
+for each labeled data set in the chip-seq benchmark. 
+
+[[file:PDPA.models.R]] downloads precomputed PeakSegPDPA models and
+computes target intervals for comparison with the FPOP models.
