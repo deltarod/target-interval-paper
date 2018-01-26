@@ -2,8 +2,8 @@ library(data.table)
 library(PeakError)
 counts.RData.vec <- Sys.glob("data/H*/*/counts.RData")
 PDPA.models.list <- list()
-i.vec <- seq_along(counts.RData.vec)
 i.vec <- 1:2
+i.vec <- seq_along(counts.RData.vec)
 PDPA.modelSelection.dt.list <- list()
 PDPA.targets.dt.list <- list()
 for(counts.RData.i in i.vec){
@@ -49,10 +49,13 @@ for(counts.RData.i in i.vec){
         status=rep(c("background", "peak"), l=n.segments))]
       peak.dt <- seg.dt[status=="peak"]
       error.df <- PeakErrorChrom(peak.dt, sample.regions)
-      PDPA.errors.list[[paste(sample.id, n.segments)]] <- with(error.df, data.table(sample.id, 
-                                                                                    peaks=(n.segments-1)/2,
-                                                                                    loss=sample.model$loss.vec[n.segments],
-        errors=sum(fp+fn)))
+      PDPA.errors.list[[paste(sample.id, n.segments)]] <- with(error.df, data.table(
+        sample.id, 
+        peaks=(n.segments-1)/2,
+        loss=sample.model$loss.vec[n.segments],
+        fp=sum(fp),
+        fn=sum(fn),
+        errors=sum(fp+fn)),)
     }
   }
   PDPA.errors <- do.call(rbind, PDPA.errors.list)

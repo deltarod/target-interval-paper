@@ -5,6 +5,15 @@ when there are hundreds/thousands of desired peaks/segments.
 
 ** TODOs
 
+** 26 Jan 2018
+
+[[file:figure-FPOP-PDPA-compare.R]] computes and plots differences between
+the target intervals in FPOP and PDPA.
+
+[[file:figure-FPOP-PDPA-compare.png]]
+
+[[file:figure-FPOP-PDPA-compare-limits.png]]
+
 ** 19 Jan 2018
 
 [[file:FPOP.models.R]] uses PeakSegPipeline to compute target intervals

@@ -1,9 +1,10 @@
 library(data.table)
+library(parallel)
+library(PeakSegPipeline)
 counts.RData.vec <- Sys.glob("data/H*/*/counts.RData")
-FPOP.models.list <- list()
 i.vec <- seq_along(counts.RData.vec)
 ##i.vec <- 1:2
-for(counts.RData.i in i.vec){
+FPOP.models.list <- mclapply(i.vec, function(counts.RData.i){
   counts.RData <- counts.RData.vec[[counts.RData.i]]
   chunk.dir <- dirname(counts.RData)
   chunk.name <- sub("data/", "", chunk.dir)
@@ -55,7 +56,8 @@ for(counts.RData.i in i.vec){
         quote=FALSE,
         sep="\t",
         col.names=FALSE)
-      L <- PeakSegPipeline::problem.target(sample.dir)
+      print(sample.dir)
+      L <- problem.target(sample.dir)
       print(L$models)
       errors.dt <- L$models[, errors := fp + fn]
       min.err.dt <- errors.dt[min(errors)==errors]
@@ -69,10 +71,10 @@ for(counts.RData.i in i.vec){
     }, by=list(cell.type, sample.id)]
     saveRDS(target.dt, PeakSegFPOP_targets.rds)
   }
-  FPOP.models.list[[chunk.name]] <- data.table(
+  data.table(
     chunk.name, chunk.id, set.name,
     target.dt)
-}
+})
 FPOP.models <- do.call(rbind, FPOP.models.list)
-
+ 
 save(FPOP.models, file="FPOP.models.RData")
