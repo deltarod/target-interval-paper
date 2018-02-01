@@ -4,6 +4,11 @@ library(data.table)
 load("FPOP.models.RData")
 load("PDPA.models.RData")
 
+FPOP.models[min.log.lambda != -Inf, min(min.log.lambda)]
+FPOP.models[max.log.lambda != Inf, max(max.log.lambda)]
+## => a grid of values between 5 and 16
+exp(seq(5, 16, l=12))
+
 diff.dt <- FPOP.models[, list(
   chunk.name, sample.id,
   fpop.min=min.log.lambda,

@@ -5,6 +5,14 @@ when there are hundreds/thousands of desired peaks/segments.
 
 ** TODOs
 
+** 1 Feb 2018
+
+[[file:FPOP.gridsearch.R]] computes a target interval based on a grid of
+values that spans the FPOP target intervals (on average the same
+number of FPOP evaluations as the target interval algo, the idea is to
+show that it gets sub-optimal error/intervals in the same amount of
+computation time).
+
 ** 26 Jan 2018
 
 [[file:figure-FPOP-PDPA-compare.R]] computes and plots differences between
