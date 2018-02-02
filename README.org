@@ -5,6 +5,22 @@ when there are hundreds/thousands of desired peaks/segments.
 
 ** TODOs
 
+compute test error differences using the three different target
+intervals.
+
+** 2 Feb 2018
+
+[[file:FPOP.neuroblastoma.R]] computes the FPOP target interval,
+gridsearch, and PDPA target interval, for the neuroblastoma data set.
+
+[[file:figure-FPOP-gridsearch-compare.R]] plots the differences between
+target intervals using proposed target interval search, and naive grid
+search.
+
+[[file:figure-FPOP-gridsearch-compare-limits.png]]
+
+[[file:figure-FPOP-gridsearch-compare.png]]
+
 ** 1 Feb 2018
 
 [[file:FPOP.gridsearch.R]] computes a target interval based on a grid of

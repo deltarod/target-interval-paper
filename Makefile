@@ -1,3 +1,5 @@
+FPOP.neuroblastoma.RData: FPOP.neuroblastoma.R
+	R --no-save < $<
 FPOP.gridsearch.RData: FPOP.gridsearch.R
 	R --no-save < $<
 figure-FPOP-PDPA-compare.png: figure-FPOP-PDPA-compare.R FPOP.models.RData PDPA.models.RData

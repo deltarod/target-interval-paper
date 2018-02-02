@@ -45,10 +45,10 @@ dev.off()
 
 diff.counts <- diff.dt[, list(count=.N), by=list(models.diff, errors.diff)]
 more.dt <- data.table(
-  x=0,
+  x=c(-1, 1),
   hjust=c(1, 0),
   y=2.5,
-  label=c("more proposed ", " more grid search"))
+  label=c("<- more proposed", "more grid search ->"))
 more.y.dt <- data.table(
   x=-25,
   vjust=c(1.2, -0.3),
