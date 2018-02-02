@@ -1,6 +1,4 @@
-library(data.table)
-library(parallel)
-library(PeakSegPipeline)
+source("packages.R")
 counts.RData.vec <- Sys.glob("data/H*/*/counts.RData")
 i.vec <- seq_along(counts.RData.vec)
 ##i.vec <- 1:2

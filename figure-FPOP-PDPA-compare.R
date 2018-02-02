@@ -1,5 +1,4 @@
-library(ggplot2)
-library(data.table)
+source("packages.R")
 
 load("FPOP.models.RData")
 load("PDPA.models.RData")

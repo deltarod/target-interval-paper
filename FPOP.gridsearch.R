@@ -1,6 +1,5 @@
-library(data.table)
-library(parallel)
-library(PeakSegPipeline)
+source("packages.R")
+
 counts.RData.vec <- Sys.glob("data/H*/*/counts.RData")
 i.vec <- seq_along(counts.RData.vec)
 ##i.vec <- 1:2
@@ -58,10 +57,10 @@ for(counts.RData.i in i.vec){
     }, by=list(cell.type, sample.id)]
     saveRDS(target.dt, PeakSegFPOP_gridsearch.rds)
   }
-  data.table(
+  FPOP.gridsearch.list[[paste(chunk.name)]] <- data.table(
     chunk.name, chunk.id, set.name,
     target.dt)
 }
 FPOP.gridsearch <- do.call(rbind, FPOP.gridsearch.list)
  
-save(FPOP.gridsearch, file="FPOP.gridsearch.RData")
+save(FPOP.gridsearch, penalty.vec, file="FPOP.gridsearch.RData")

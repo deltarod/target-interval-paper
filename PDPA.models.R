@@ -1,5 +1,5 @@
-library(data.table)
-library(PeakError)
+source("packages.R")
+
 counts.RData.vec <- Sys.glob("data/H*/*/counts.RData")
 PDPA.models.list <- list()
 i.vec <- 1:2
