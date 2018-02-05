@@ -14,6 +14,8 @@ label.dt <- data.table(neuroblastoma$annotations)
 profile.dt <- data.table(neuroblastoma$profiles)
 setkey(profile.dt, profile.id, chromosome)
 
+label.i <- label.dt[,which(profile.id==4 & chromosome==2)]
+
 FPOP.neuroblastoma.list <- list()
 for(label.i in 1:nrow(label.dt)){
   this.label <- label.dt[label.i]
