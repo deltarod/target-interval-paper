@@ -8,6 +8,29 @@ when there are hundreds/thousands of desired peaks/segments.
 compute test error differences using the three different target
 intervals.
 
+** 22 Sept 2020
+
+[[file:figure-penalties-per-problem.R]] compares how many penalties you
+can compute in a limited amount of time.
+
+[[file:figure-penalties-per-problem.png]]
+
+order.type=full means to first do an entire problem.target search
+(compute several penalties) on the smallest labeled data set, then do
+an entire search on the second smallest, etc.
+
+order.type=partial means to do one iteration/penalty of the search
+algorithm on each labeled data set first, then do a second iteration
+on each, etc.
+
+We can see that for a small amount of time the partial method results
+in more computed penalties, but for a larger amount of time the full
+method results in more computed penalties.
+
+TODO hybrid method which stays up?
+
+TODO compute test accuracy/AUC.
+
 ** 2 Feb 2018
 
 [[file:FPOP.neuroblastoma.R]] computes the FPOP target interval,
