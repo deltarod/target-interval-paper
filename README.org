@@ -23,6 +23,10 @@ in order to get the absolute target change below a certain threshold,
 
 [[file:figure-penalties-per-problem-maxit-thresh-hist.png]]
 
+Also a figure showing how much time it takes to compute a certain
+number of training examples (n.train), for different thresholds,
+
+[[file:figure-penalties-per-problem-maxit-thresh-train.png]]
 
 ** 22 Sept 2020
 

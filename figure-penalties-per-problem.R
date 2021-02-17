@@ -100,6 +100,53 @@ png("figure-penalties-per-problem-maxit-thresh-hist.png", width=13, height=8, un
 print(gg)
 dev.off()
 
+thresh.train.seconds.dt.list <- list()
+for(thresh.i in seq_along(thresh.vec)){
+  t.val <- thresh.vec[[thresh.i]]
+  t.it <- it.per.prob[t.val==thresh]
+  t.join <- t.it[labeled_problems_penalties, on="prob.dir"]
+  below.max <- t.join[iteration <= max.it]
+  seconds.per.prob <- below.max[, .(
+    seconds=sum(seconds)
+  ), keyby=.(bedGraph.lines, prob.dir)]
+  thresh.train.seconds.dt.list[[paste(t.val)]] <- data.table(
+    thresh.i,
+    thresh=t.val,
+    n.train=1:nrow(seconds.per.prob),
+    seconds.per.prob[, .(seconds, cum.seconds=cumsum(seconds))])
+}
+(thresh.train.seconds.dt <- do.call(rbind, thresh.train.seconds.dt.list))
+
+gg <- ggplot()+
+  geom_line(aes(
+    n.train, cum.seconds,
+    group=thresh.i,
+    color=thresh.i),
+    data=thresh.train.seconds.dt)+
+  scale_x_log10(limits=c(1, 8000))+
+  scale_y_log10()+
+  scale_color_gradient(low="black", high="red")+
+  directlabels::geom_dl(aes(
+    n.train, cum.seconds, label=thresh, color=thresh.i),
+    data=thresh.train.seconds.dt,
+    method="last.qp")+
+  theme(legend.position="none")
+png("figure-penalties-per-problem-maxit-thresh-train.png", width=8, height=13, units="in", res=100)
+print(gg)
+dev.off()
+
+
+ggplot()+
+  geom_line(aes(
+    cum.seconds, n.train),
+    data=thresh.train.seconds.dt)+
+  facet_grid(thresh ~ .)
+
+ggplot()+
+  geom_line(aes(
+    n.train, cum.seconds, color=thresh),
+    data=thresh.train.seconds.dt)
+
 ## Do error rates always decrease after the first iteration? no.
 err.ranges <- labeled_problems_iterations[, .(
   first.errors=errors[1],
