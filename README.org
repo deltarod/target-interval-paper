@@ -8,6 +8,26 @@ when there are hundreds/thousands of desired peaks/segments.
 compute test error differences using the three different target
 intervals.
 
+** 17 Feb 2021
+
+Updated [[file:figure-penalties-per-problem.R]] to additionally make a
+plot of number of training examples (for the penalty learning problem) 
+we can compute with partial method, as a function of the number of
+training examples that we can compute in the same amount of time using
+full method,
+
+[[file:figure-penalties-per-problem-train.png]] 
+
+Also a figure which shows how many problem.target iterations it takes
+in order to get the absolute target change below a certain threshold,
+
+[[file:figure-penalties-per-problem-maxit-thresh-hist.png]]
+
+Also a figure showing how much time it takes to compute a certain
+number of training examples (n.train), for different thresholds,
+
+[[file:figure-penalties-per-problem-maxit-thresh-train.png]]
+
 ** 22 Sept 2020
 
 [[file:figure-penalties-per-problem.R]] compares how many penalties you
