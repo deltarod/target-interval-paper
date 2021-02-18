@@ -22,6 +22,16 @@ possible.dt <- nc::capture_first_df(
 possible.problems.folds <- data.list[["labeled_problems_folds.csv"]][
   possible.dt, on=c("set.name", "problem")]
 
+# K-Fold CV
+K <- 2
+
+possible.problems.folds[,fold:=NULL]
+
+fold_vec <- sample( rep( 1:K, l=nrow(possible.problems.folds)))
+
+possible.problems.folds[,'fold':=fold_vec]
+
+
 labeled_problems_penalties <- data.list[["target.intervals.models.csv"]][
   data.list[["labeled_problems_features.csv"]][["prob.dir"]], on="prob.dir"
 ][
@@ -66,6 +76,7 @@ for(test.fold.i in 1:nrow(possible.folds)){
     }
   }
 }
+
 penalties.dt <- do.call(rbind, penalties.dt.list)
 
 library(ggplot2)
